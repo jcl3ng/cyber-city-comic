@@ -12,9 +12,9 @@ html(lang="en")
                 li(class='page-item' class=comicNav.isFirst ? 'disabled' : '')
                     a(class='page-link' href="/" + comicNav.prevNum +comicNav.jsonRes)='Previous' 
                 li(class='page-item')
-                    form
+                    form(method = 'POST' action = '/submit-form')
                         //- a(class='page-link' href="/" + input.value +comicNav.jsonRes)
-                        input.submit(class='form-control' id='gotoComicNum' type='number' placeholder='Enter Comic Num' )
+                        input.submit(class='form-control' name='comicNum' id='gotoComicNum' type='number' placeholder='Enter Comic Num' )
                 li(class='page-item' class=comicNav.isLast ? 'disabled' : '')
                     a(class='page-link' href="/" + comicNav.nextNum +comicNav.jsonRes)='Next' 
                 li(class='page-item')

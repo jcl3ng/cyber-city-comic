@@ -2,6 +2,11 @@ const express = require('express');
 const path = require('path');
 const request = require('request');
 const router = express.Router();
+const bodyParser = require("body-parser");
+const {
+  body,
+  validationResult
+} = require('express-validator');
 
 const app = express();
 
@@ -13,6 +18,12 @@ app.set('views', path.join(__dirname, 'views'))
 app.set("view engine", "pug")
 
 app.use(express.static(path.join(__dirname, "public")));
+
+var jsonParser = bodyParser.json()
+var urlencodedParser = bodyParser.urlencoded({
+  extended: false
+})
+
 
 const comicUri = process.env.COMIC_SOURCE_URI || "http://xkcd.com";
 const comicInfo = process.env.COMIC_SOURCE_INFO || "/info.0.json";
@@ -69,5 +80,27 @@ router.get('/', (req, res) => {
     });
   });
 });
+
+
+router.post('/submit-form', urlencodedParser,
+  (req, res) => {
+    const comicNumber = req.body.comicNum
+    var comicAPI = comicUri + "/" + comicNumber + comicInfo
+    res.redirect('/' + comicNumber + comicInfo)
+    request(comicAPI, {
+      json: true
+    }, (error, response, body) => {
+      if (error) {
+        console.log('error:', error);
+        res.send(body)
+      }
+      var issueDate = body.day + "/" + body.month + "/" + body.year
+      res.render("index", {
+        comic: body,
+        issueDate: issueDate,
+        comicNav: getNavInfo(body.num)
+      });
+    });
+  });
 
 module.exports = router;
