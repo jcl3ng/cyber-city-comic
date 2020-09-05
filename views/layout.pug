@@ -1,0 +1,24 @@
+doctype html
+html(lang="en")
+    head
+        title= comic.title
+        link(rel='stylesheet' href='/css/bootstrap.min.css')
+    body
+        h1.heading-3.text-center.text-primary Cyber City Comics 
+        nav#navbar-default  
+            ul.pagination(class='justify-content-center')
+                li(class='page-item')
+                    a(class='page-link' href='/1'+comicNav.jsonRes tabindex='-1' aria-disabled='true')='First' 
+                li(class='page-item' class=comicNav.isFirst ? 'disabled' : '')
+                    a(class='page-link' href="/" + comicNav.prevNum +comicNav.jsonRes)='Previous' 
+                li(class='page-item')
+                    form
+                        //- a(class='page-link' href="/" + input.value +comicNav.jsonRes)
+                        input.submit(class='form-control' id='gotoComicNum' type='number' placeholder='Enter Comic Num' )
+                li(class='page-item' class=comicNav.isLast ? 'disabled' : '')
+                    a(class='page-link' href="/" + comicNav.nextNum +comicNav.jsonRes)='Next' 
+                li(class='page-item')
+                    a(class='page-link' href='/')='Last' 
+
+        block content
+    script(src="/public/gotoComic.js")

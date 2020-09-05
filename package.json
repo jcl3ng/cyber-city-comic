@@ -1,0 +1,20 @@
+{
+  "name": "comics",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "npx nodemon main.js routes/webjs"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.3",
+    "path": "^0.12.7",
+    "pug": "^3.0.0",
+    "request": "^2.88.2"
+  }
+}

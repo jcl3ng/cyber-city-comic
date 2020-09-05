@@ -1,0 +1,8 @@
+extends layout
+
+block content
+
+    div(class="container p-3 my-3 bg-secondary text-white")
+        h2.heading-5 #{comic.title}
+        p.display-7 Date Created: #{issueDate}
+        img(src= comic.img class="mx-auto d-block")
